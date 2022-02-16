@@ -28,5 +28,14 @@ services:
       - DB_PORT=$MONGODB_DOCKER_PORT
     stdin_open: true
     tty: true
+  frontend:
+    depends_on:
+      - backend
+    build: ./frontend
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    stdin_open: true
+    tty: true
 volumes:
   db:
