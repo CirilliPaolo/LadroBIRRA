@@ -10,15 +10,15 @@ exports.create = (req, res) => {
   }
 
   // Create a Recipe
-  const tutorial = new Recipe({
+  const recipe = new Recipe({
     title: req.body.title,
     description: req.body.description,
     published: req.body.published ? req.body.published : false,
   });
 
   // Save Recipe in the database
-  tutorial
-    .save(tutorial)
+  recipe
+    .save(recipe)
     .then((data) => {
       res.send(data);
     })

@@ -9,13 +9,13 @@ Requisiti progetto:
 Per far partire il progetto:
 
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 
 Per avviare Docker in backgroud:
 
 ```bash
-docker-compose up -d
+docker-compose up --build -d
 ```
 
 ## Stop System
