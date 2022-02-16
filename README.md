@@ -2,9 +2,17 @@
 
 ## Init System
 
-Requisiti progetto:
+Requisiti per la prof:
 
 - Docker
+
+Requisiti per gli sviluppatori:
+
+- Docker
+- nodejs
+- npm
+- Angular CLI
+- Ide consigliato: Vs Code
 
 Per far partire il progetto:
 
