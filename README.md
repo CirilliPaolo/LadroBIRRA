@@ -1,53 +1,33 @@
-# Docker Compose Nodejs and MongoDB example
+# Progetto Birra 3
 
-## Run the System
+## Init System
 
-We can easily run the whole with only a single command:
+Requisiti progetto:
+
+- Docker
+
+Per far partire il progetto:
 
 ```bash
 docker-compose up
 ```
 
-Docker will pull the MongoDB and Node.js images (if our machine does not have it before).
-
-The services can be run on the background with command:
+Per avviare Docker in backgroud:
 
 ```bash
 docker-compose up -d
 ```
 
-## Stop the System
+## Stop System
 
-Stopping all the running containers is also simple with a single command:
+Per stoppare i container del il progetto:
 
 ```bash
 docker-compose down
 ```
 
-If you need to stop and remove all containers, networks, and all images used by any service in <em>docker-compose.yml</em> file, use the command:
+Se avete bisogno di fermare e rimuovere tutti i contenitori, le reti e tutte le immagini utilizzate da qualsiasi servizio nel file <em>docker-compose.yml</em>, utilizzate il comando
 
 ```bash
 docker-compose down --rmi all
 ```
-
-For more detail, please visit:
-
-> [Docker Compose Node.js Express and MongoDB example](https://www.backend.com/docker-compose-nodejs-mongodb/)
-
-Related Posts:
-
-> [Node.js, Express & MongoDb: Build a CRUD Rest Api example](https://backend.com/node-express-mongodb-crud-rest-api/)
-
-> [Server side Pagination in Node.js with MongoDB and Mongoose](https://backend.com/node-js-mongodb-pagination/)
-
-Security:
-
-> [Node.js + MongoDB: User Authentication & Authorization with JWT](https://backend.com/node-js-mongodb-auth-jwt/)
-
-Associations:
-
-> [MongoDB One-to-One relationship tutorial with Mongoose examples](https://backend.com/mongoose-one-to-one-relationship-example/)
-
-> [MongoDB One-to-Many Relationship tutorial with Mongoose examples](https://backend.com/mongoose-one-to-many-relationship/)
-
-> [MongoDB Many-to-Many Relationship with Mongoose examples](https://backend.com/mongodb-many-to-many-mongoose/)
