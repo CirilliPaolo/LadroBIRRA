@@ -60,7 +60,7 @@ Poi per vedere il progetto in locale (http://localhost:4200/)
 ## Per la build locale con Docker
 
 ```bash
-docker-compose up --build
+docker-compose up --build -d
 ```
 
 ## Per la build locale senza Docker
