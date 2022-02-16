@@ -12,6 +12,8 @@ export class AppComponent implements OnInit {
 
   items: MenuItem[] = [];
 
+  showHamburger: boolean = false;
+
   ngOnInit() {
     this.primengConfig.ripple = true;
     this.items = [

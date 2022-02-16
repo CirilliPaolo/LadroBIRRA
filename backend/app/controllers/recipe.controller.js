@@ -12,6 +12,7 @@ exports.create = (req, res) => {
   // Create a Recipe
   const recipe = new Recipe({
     title: req.body.title,
+    color: req.body.color,
     description: req.body.description,
     published: req.body.published ? req.body.published : false,
   });

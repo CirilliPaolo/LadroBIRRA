@@ -15,15 +15,38 @@ import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { SpeedDialModule } from 'primeng/speeddial';
-
+import { DataViewModule } from 'primeng/dataview';
+import { PanelModule } from 'primeng/panel';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { RatingModule } from 'primeng/rating';
+import { RippleModule } from 'primeng/ripple';
+import { BeerListComponent } from './components/beer-list/beer-list.component';
+import { BeerService } from './services/beer/beer.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
 @NgModule({
   declarations: [
     AppComponent,
     AddRecipeComponent,
     RecipeDetailsComponent,
     RecipesListComponent,
+    BeerListComponent,
+    BreadcrumbsComponent,
   ],
   imports: [
+    ToastModule,
+    PanelModule,
+    DropdownModule,
+    DialogModule,
+    RatingModule,
+    RippleModule,
+    DataViewModule,
     HttpClientModule,
     FormsModule,
     BrowserModule,
@@ -32,9 +55,13 @@ import { SpeedDialModule } from 'primeng/speeddial';
     MenubarModule,
     SpeedDialModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    FontAwesomeModule,
+    CascadeSelectModule,
+    MessagesModule,
+    MessageModule,
   ],
-  providers: [],
+  providers: [BeerService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,21 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { Recipe } from 'src/app/models/recipe.model';
-import { RecipeService } from 'src/app/services/recipe.service';
-
+import { Recipe } from 'src/app/models/recipe/recipe.model';
+import { RecipeService } from 'src/app/services/recipe/recipe.service';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-recipes-list',
   templateUrl: './recipes-list.component.html',
   styleUrls: ['./recipes-list.component.css']
 })
 export class RecipesListComponent implements OnInit {
+  faSearch = faSearch;
   itemsFloatingButton: MenuItem[] = [];
 
   recipes?: Recipe[];
   currentRecipe: Recipe = {};
   currentIndex = -1;
   title = '';
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.retrieveRecipes();
@@ -24,7 +27,7 @@ export class RecipesListComponent implements OnInit {
       {
         icon: 'pi pi-pencil',
         command: () => {
-          alert("Add");
+          this.router.navigate(['/recipes/add']);
         }
       },
       {
@@ -73,6 +76,17 @@ export class RecipesListComponent implements OnInit {
         next: (data) => {
           this.recipes = data;
           console.log(data);
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  deleteRecipe(id: string): void {
+    this.recipeService.delete(id)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.recipes = this.recipes?.filter(x => x.id != id);
         },
         error: (e) => console.error(e)
       });
