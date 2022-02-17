@@ -14,8 +14,7 @@ const routes: Routes = [
       { path: 'edit/:id', component: RecipeDetailsComponent },
       { path: 'add', component: AddRecipeComponent }
     ]
-  },
-
+  }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
