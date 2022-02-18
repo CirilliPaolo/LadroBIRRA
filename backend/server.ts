@@ -1,7 +1,7 @@
 import express from "express";
 import cors, { CorsOptions } from "cors";
 import db from "./app/models";
-import { recipeRoutes } from "./app/routes/recipeRoutes";
+import { recipeRouter } from "./app/routes/recipeRoutes";
 import { config } from "dotenv";
 const app = express();
 
@@ -38,10 +38,12 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to backend application." });
 });
 
-recipeRoutes(express);
+// recipeRoutes(express);
+app.use("/api/recipes", recipeRouter);
 
 // set port, listen for requests
 const PORT = process.env.NODE_DOCKER_PORT || 8080;
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

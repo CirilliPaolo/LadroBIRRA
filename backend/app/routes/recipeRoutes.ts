@@ -1,36 +1,26 @@
 import * as recipes from "../controllers/recipeController";
 import express from "express";
 
-// module.exports = (app: any) => {
-//   var router = require("express").Router();
+const recipeRouter = express.Router();
 
-//   // Create a new recipes
-//   router.post("/", recipes.create);
+recipeRouter.post("/", recipes.create);
 
 //   // // Retrieve all recipes
-//   // router.get("/", recipes.findAll);
+recipeRouter.get("/", recipes.findAllRecipes);
 
 //   // // Retrieve all published recipes
-//   // router.get("/published", recipes.findAllPublished);
+recipeRouter.get("/published", recipes.findAllPublished);
 
 //   // // Retrieve a single recipes with id
-//   // router.get("/:id", recipes.findOne);
+recipeRouter.get("/:id", recipes.findOneRecipe);
 
 //   // // Update a recipes with id
-//   // router.put("/:id", recipes.update);
+recipeRouter.put("/:id", recipes.updateRecipe);
 
 //   // // Delete a recipes with id
-//   // router.delete("/:id", recipes.delete);
+recipeRouter.delete("/:id", recipes.deleteRecipe);
 
 //   // // Create a new recipes
-//   // router.delete("/", recipes.deleteAll);
+recipeRouter.delete("/", recipes.deleteAll);
 
-//   app.use("/api/recipes", router);
-// };
-const router = express.Router();
-
-export const recipeRoutes = (app: typeof express) => {
-  router.post("/", recipes.create);
-
-  app().use("/api/recipes", router);
-};
+export { recipeRouter };
