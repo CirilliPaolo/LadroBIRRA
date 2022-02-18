@@ -1,10 +1,13 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-
+import express from "express";
+import cors, { CorsOptions } from "cors";
+import db from "./app/models";
+import { recipeRouter } from "./app/routes/recipeRoutes";
+import { config } from "dotenv";
 const app = express();
 
-var corsOptions = {
+config();
+
+const corsOptions: CorsOptions = {
   origin: [
     "http://localhost:8081",
     "http://localhost:4200",
@@ -20,19 +23,12 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-const db = require("./app/models");
-
-console.log(db.url);
-
 db.mongoose
-  .connect(db.url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(db.url)
   .then(() => {
     console.log("Connected to the database!");
   })
-  .catch((err) => {
+  .catch((err: any) => {
     console.log("Cannot connect to the database!", err);
     process.exit();
   });
@@ -42,10 +38,12 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to backend application." });
 });
 
-require("./app/routes/recipe.routes")(app);
+// recipeRoutes(express);
+app.use("/api/recipes", recipeRouter);
 
 // set port, listen for requests
 const PORT = process.env.NODE_DOCKER_PORT || 8080;
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
