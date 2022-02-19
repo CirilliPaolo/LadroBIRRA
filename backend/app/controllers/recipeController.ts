@@ -1,8 +1,15 @@
-const db = require("../models");
-const Recipe = db.recipes;
+import db from "../models";
+import { RecipeModel } from "../models/recipeModel";
+import express, { Request, Response } from "express";
+import {
+  findAllRecipesQueryParams,
+  findOneRecipeParams,
+} from "../types/recipeControllerTypes";
+
+const Recipe: typeof RecipeModel = db.recipes;
 
 // Create and Save a new Recipe
-exports.create = (req, res) => {
+export const create = (req: Request, res: Response) => {
   // Validate request
   if (!req.body.title) {
     res.status(400).send({ message: "Content can not be empty!" });
@@ -16,10 +23,8 @@ exports.create = (req, res) => {
     description: req.body.description,
     published: req.body.published ? req.body.published : false,
   });
-
-  // Save Recipe in the database
   recipe
-    .save(recipe)
+    .save()
     .then((data) => {
       res.send(data);
     })
@@ -31,13 +36,13 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Recipes from the database.
-exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title
+// // Retrieve all Recipes from the database.
+export const findAllRecipes = (req: Request, res: Response) => {
+  const { title } = req.query as unknown as findAllRecipesQueryParams;
+
+  const condition = title
     ? { title: { $regex: new RegExp(title), $options: "i" } }
     : {};
-
   Recipe.find(condition)
     .then((data) => {
       res.send(data);
@@ -49,9 +54,10 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single Recipe with an id
-exports.findOne = (req, res) => {
-  const id = req.params.id;
+// // Find a single Recipe with an id
+
+export const findOneRecipe = (req: Request, res: Response) => {
+  const { id } = req.params as unknown as findOneRecipeParams;
 
   Recipe.findById(id)
     .then((data) => {
@@ -66,15 +72,15 @@ exports.findOne = (req, res) => {
     });
 };
 
-// Update a Recipe by the id in the request
-exports.update = (req, res) => {
+// // Update a Recipe by the id in the request
+export const updateRecipe = (req: Request, res: Response) => {
+  const { id } = req.params as unknown as findOneRecipeParams;
+
   if (!req.body) {
     return res.status(400).send({
       message: "Data to update can not be empty!",
     });
   }
-
-  const id = req.params.id;
 
   Recipe.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .then((data) => {
@@ -91,9 +97,9 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete a Recipe with the specified id in the request
-exports.delete = (req, res) => {
-  const id = req.params.id;
+// // Delete a Recipe with the specified id in the request
+export const deleteRecipe = (req: Request, res: Response) => {
+  const { id } = req.params as unknown as findOneRecipeParams;
 
   Recipe.findByIdAndRemove(id, { useFindAndModify: false })
     .then((data) => {
@@ -114,8 +120,8 @@ exports.delete = (req, res) => {
     });
 };
 
-// Delete all Recipes from the database.
-exports.deleteAll = (req, res) => {
+// // Delete all Recipes from the database.
+export const deleteAll = (req: Request, res: Response) => {
   Recipe.deleteMany({})
     .then((data) => {
       res.send({
@@ -131,7 +137,7 @@ exports.deleteAll = (req, res) => {
 };
 
 // Find all published Recipes
-exports.findAllPublished = (req, res) => {
+export const findAllPublished = (req: Request, res: Response) => {
   Recipe.find({ published: true })
     .then((data) => {
       res.send(data);
